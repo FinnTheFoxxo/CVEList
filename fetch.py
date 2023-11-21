@@ -35,7 +35,16 @@ def Fetch():
                 ref = "N/A"
             score = cve_url.json()['data']['_source']['cvss3_severity']
             desc = cve_url.json()['data']['_source']['description']
-        print(f"CVE-{datetime.now().year}-{y} - {score} ({base_score}) \n {desc} \n References: {ref} \n")
+        if score == "Critical":
+            print(f"CVE-{datetime.now().year}-{y} - \033[0;91m{score} ({base_score})\033[0;0m \n {desc} \n References: {ref} \n")
+        elif score == "High":
+            print(f"CVE-{datetime.now().year}-{y} - \033[38;5;202m{score} ({base_score})\033[0;0m \n {desc} \n References: {ref} \n")
+        elif score == "Medium":
+            print(f"CVE-{datetime.now().year}-{y} - \033[0;93m{score} ({base_score})\033[0;0m \n {desc} \n References: {ref} \n")
+        elif score == "Low":
+            print(f"CVE-{datetime.now().year}-{y} - \033[38;5;82m{score} ({base_score})\033[0;0m \n {desc} \n References: {ref} \n")
+        else:
+            print(f"CVE-{datetime.now().year}-{y} - {score} ({base_score}) \n {desc} \n References: {ref} \n")
         io.write(f"CVE-{datetime.now().year}-{y} - {score} ({base_score}) \n {desc} \n References: {ref} \n\n")
         io.flush()
 

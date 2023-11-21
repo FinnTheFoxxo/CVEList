@@ -1,6 +1,11 @@
 # Fetches the latest CVEs from tenable.com
 
-Sorts the CVEs by most recent, then prints them, and places them into a file.
+Features:
+
+* Sorts CVEs by most recent.
+* Returns the description of the CVE.
+* Returns the CVSS base score and severity (with color coding).
+* Returns any references listed by tenable.
 
 # Installation
 

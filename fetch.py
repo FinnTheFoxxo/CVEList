@@ -10,7 +10,7 @@ for y in x:
     os.remove(y)
 
 def Fetch(url):
-    lst = requests.get(url); print(lst.text)
+    lst = requests.get(url)
     sorting = []
     for x in range(1, 49):
         cve = sorting.append(lst.json()['data']['hits'][x]['_id'][9:])

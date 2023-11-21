@@ -9,8 +9,8 @@ x = glob.glob(os.path.join("cve", '*'))
 for y in x:
     os.remove(y)
 
-def Fetch(url):
-    lst = requests.get(url)
+def Fetch():
+    lst = requests.get("https://www.tenable.com/cve/api/v1?sort=newest")
     sorting = []
     for x in range(1, 49):
         cve = sorting.append(lst.json()['data']['hits'][x]['_id'][9:])
@@ -39,5 +39,5 @@ def Fetch(url):
         io.write(f"CVE-{datetime.now().year}-{y} - {score} ({base_score}) \n {desc} \n References: {ref} \n\n")
         io.flush()
 
-Fetch("https://www.tenable.com/cve/api/v1?sort=newest")
+Fetch()
 

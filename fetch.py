@@ -24,7 +24,7 @@ def Fetch():
         else:
             try:
                 base_score = cve_url.json()['data']['_source']['cvss3_base_score']
-            except KeyError:
+            except (KeyError, IndexError):
                 base_score = "N/A"
             try:
                 ref_list = cve_url.json()['data']['_source']['references']
@@ -32,8 +32,14 @@ def Fetch():
                     ref.append(url['url'])
             except (KeyError, IndexError):
                 ref = None
-            score = cve_url.json()['data']['_source']['cvss3_severity']
-            desc = cve_url.json()['data']['_source']['description']
+            try:
+                score = cve_url.json()['data']['_source']['cvss3_severity']
+            except (KeyError, IndexError):
+                score = "N/A"
+            try:
+                desc = cve_url.json()['data']['_source']['description']
+            except (KeyError, IndexError):
+                desc = "N/A"
         if len(ref) == 0:
             refs = "N/A"
         else:
